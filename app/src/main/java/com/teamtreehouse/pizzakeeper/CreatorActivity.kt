@@ -24,12 +24,13 @@ class CreatorActivity : AppCompatActivity() {
 
         pizzaId = intent.getIntExtra(PIZZA_ID, -1)
         viewModel = ViewModelProviders.of(this).get(CreatorViewModel::class.java)
-        pizzaView = PizzaView(this, mutableMapOf())
+        title = viewModel.pizzaName
+        pizzaView = PizzaView(this, viewModel.switchStates)
 
         val frameLayout = findViewById<FrameLayout>(R.id.frameLayout)
         frameLayout.addView(pizzaView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
-        val adapter = CreatorAdapter(pizzaView)
+        val adapter = CreatorAdapter(pizzaView, viewModel)
         val recyclerView = findViewById<RecyclerView>(R.id.toppingsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
@@ -56,6 +57,7 @@ class CreatorActivity : AppCompatActivity() {
                     if (editText.text.isNotEmpty()) {
                         val text = editText.text.toString()
                         title = text
+                        viewModel.pizzaName = text
                     }
                 }).show()
             }
