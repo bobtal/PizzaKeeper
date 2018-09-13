@@ -1,5 +1,6 @@
 package com.teamtreehouse.pizzakeeper
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -15,12 +16,14 @@ import android.widget.Toast
 class CreatorActivity : AppCompatActivity() {
     private var pizzaId = -1
     lateinit var pizzaView: PizzaView
+    lateinit var viewModel: CreatorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator)
 
         pizzaId = intent.getIntExtra(PIZZA_ID, -1)
+        viewModel = ViewModelProviders.of(this).get(CreatorViewModel::class.java)
         pizzaView = PizzaView(this, mutableMapOf())
 
         val frameLayout = findViewById<FrameLayout>(R.id.frameLayout)
