@@ -26,6 +26,7 @@ class App : Application() {
 
     override fun onCreate() {
         db = Room.databaseBuilder(applicationContext, PizzaDatabase::class.java, "PizzaDatabase")
+                .fallbackToDestructiveMigration()
                 .build()
         thread {
             toppings.forEach {

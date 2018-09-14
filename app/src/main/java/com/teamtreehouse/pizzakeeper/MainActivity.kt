@@ -1,5 +1,7 @@
 package com.teamtreehouse.pizzakeeper
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.arch.persistence.room.Room
 import android.content.Intent
 import android.os.Bundle
@@ -27,6 +29,17 @@ class MainActivity : AppCompatActivity() {
         }
         val myAdapter = MainAdapter(launchCreatorActivity)
         recyclerView.adapter = myAdapter
+
+        ViewModelProviders.of(this)
+                .get(MainViewModel::class.java)
+                .getPizzas()
+                .observe(this, Observer {
+                    if (it != null) {
+                        myAdapter.list.clear()
+                        myAdapter.list.addAll(it)
+                        myAdapter.notifyDataSetChanged()
+                    }
+                })
     }
 }
 
