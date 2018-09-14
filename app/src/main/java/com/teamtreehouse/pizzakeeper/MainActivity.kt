@@ -17,8 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val db = Room.databaseBuilder(this, PizzaDatabase::class.java, "PizzaDatabase").build()
-
         recyclerView = findViewById(R.id.pizzaRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
