@@ -14,7 +14,7 @@ interface PizzaDao {
     fun getPizzaById(id: Int): Pizza
 
     @Insert
-    fun insert(pizza: Pizza)
+    fun insert(pizza: Pizza): Long
 
     @Query("delete from pizza where id = :id")
     fun deletePizzaById(id: Int)
