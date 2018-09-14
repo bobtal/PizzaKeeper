@@ -29,6 +29,7 @@ class PizzaTests {
         val appContext = InstrumentationRegistry.getTargetContext()
         val db = Room.databaseBuilder(appContext, PizzaDatabase::class.java, "PizzaDatabase")
                 .build()
+        db.clearAllTables()
         db.pizzaDao().insert(testPizza)
         val returnedPizza = db.pizzaDao().getPizzaById(testPizza.id)
         assertEquals(testPizza, returnedPizza)
